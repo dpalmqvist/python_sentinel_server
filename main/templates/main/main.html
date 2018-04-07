@@ -1,0 +1,22 @@
+{% block content %}
+{% if not user.is_authenticated %}
+<p>Please login to see this page.</p>
+<a href="/login">Log in</a>
+{% else %}
+<h1>Detections</h1>
+<ul>
+    {% for detection in detections %}
+    <li>{{detection.sender}} - {{detection.receiver}} - {{detection.sentinel_identity.name}}</li>
+    {% endfor %}
+    <a href="detections">All detections</a><br/>
+</ul>
+
+<h1>Edit settings</h1>
+<a href="mac_identities">Identified mac addresses</a><br/>
+<a href="sentinel_identities">My sentinels</a><br/>
+<a href="claim_sentinel">Add sentinel</a><br/>
+<br/>
+<a href="/logout">Log out</a>
+{% endif %}
+
+{% endblock %}

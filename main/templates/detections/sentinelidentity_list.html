@@ -1,0 +1,9 @@
+{% block content %}
+<h1>My sentinel identities</h1>
+<ul>
+    {% for sentinel_identity in sentinel_identities_list %}
+    <li><a href="/sentinel_identity/{{sentinel_identity.mac}}">{{sentinel_identity.mac}} - {{sentinel_identity.name}}</a></li>
+    {% endfor %}
+</ul>
+<a href="/">Main menu</a>
+{% endblock %}

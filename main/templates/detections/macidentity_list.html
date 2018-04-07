@@ -1,0 +1,9 @@
+{% block content %}
+<h1>My mac identities</h1>
+<ul>
+    {% for mac_identity in mac_identities_list %}
+    <li><a href="/mac_identity/{{mac_identity.mac}}">{{mac_identity.mac}} - {{mac_identity.name}}</a></li>
+    {% endfor %}
+</ul>
+<a href="/">Main menu</a>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% block content %}
+<h1>Detection identities</h1>
+<ul>
+    {% for detection in detection_list %}
+    <li><a href="/detection/{{detection.id}}">{{detection.sender}} - {{detection.receiver}}</a></li>
+    {% endfor %}
+</ul>
+<a href="/">Main menu</a>
+{% endblock %}
