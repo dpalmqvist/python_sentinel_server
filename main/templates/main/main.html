@@ -1,3 +1,5 @@
+{% extends "main/base.html" %}
+
 {% block content %}
 {% if not user.is_authenticated %}
 <p>Please login to see this page.</p>
@@ -20,3 +22,4 @@
 {% endif %}
 
 {% endblock %}
+</body>

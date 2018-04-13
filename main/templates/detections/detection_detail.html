@@ -1,3 +1,5 @@
+{%extends "main/base.html" %}
+{% block content %}
 <h1>Detection </h1>
 <p>Sender: {{object.sender}}</p>
 <p>Receiver: {{object.receiver}}</p>
@@ -7,3 +9,4 @@
 <p>RSSI: {{object.rssi}}</p>
 <p>Timestamp: {{object.timestamp}}</p>
 <a href="/detections">Detection list</a>
+{% endblock %}

@@ -21,6 +21,7 @@ import detections.views as detection_views
 import django.contrib.auth.views as auth_views
 import main.views as main_views
 import sentinels.views as sentinel_views
+import accounts.views as accounts_views
 
 
 urlpatterns = [
@@ -28,7 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('claim_sentinel/', sentinel_views.claim_sentinel),
     url(r'^login/$', auth_views.login, {'template_name': 'accounts/login.html'}, name='login'),
-    url(r'^logout/$', auth_views.logout, name='logout'),
+    url(r'^logout/$', accounts_views.logout_view, name='logout'),
     path('report/<str:det>/', detection_views.report),
     path('mac_identities/', detection_views.MacIdentities.as_view(), ),
     path('report/<str:det>', detection_views.report),
