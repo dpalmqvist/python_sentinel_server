@@ -6,7 +6,6 @@ from django.template import loader
 # Create your views here.
 from detections.models import Detection, MacIdentity
 
-
 def main(request):
     if request.user.is_authenticated:
         mac_identities = MacIdentity.objects.filter(user = request.user)

@@ -38,6 +38,6 @@ urlpatterns = [
     path('mac_identity/<int:pk>/delete/', detection_views.MacIdentityDelete.as_view(), name='mac_identity-delete'),
     path('sentinel_identities/', detection_views.SentinelIdentities.as_view(), ),
     path('sentinel_identity/<int:pk>/', detection_views.SentinelIdentityUpdate.as_view(), name='sentinel_identity-update'),
-    path('detections/', detection_views.Detections.as_view(), ),
+    path('detections/', detection_views.detections, ),
     path('detection/<int:pk>/', detection_views.DetectionView.as_view(), name='detection-detail'),
 ]
