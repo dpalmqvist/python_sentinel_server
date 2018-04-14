@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'niuz0&)%m^v5jzo7oowvpc%+o)65dw1uwr480k8v)aqvrc=mv3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['.danielpalmqvist.se']
+ALLOWED_HOSTS = ['.danielpalmqvist.se', '127.0.0.1']
 
 # Application definition
 

@@ -6,15 +6,29 @@
 <a href="/login">Log in</a>
 {% else %}
 <h1>Detections</h1>
-<ul>
-    {% for detection in detections %}
-    <li>{{detection.sender}} - {{detection.receiver}} - {{detection.sentinel_identity.name}}</li>
+<table>
+    {% for detection in detection_list %}
+    <tr>
+        <td><a href="/detection/{{detection.id}}">{{detection.timestamp|date:"c"}}</a></td>
+        <td>{{detection.sender}}</td>
+        <td>{{detection.receiver}}</td>
+    </tr>
     {% endfor %}
-    <a href="detections">All detections</a><br/>
-</ul>
+</table>
+<a href="detections">All detections</a><br/>
+
+<h1>Identified Mac Addresses</h1>
+<table>
+    {% for mac_identity in mac_identities %}
+    <tr>
+        <td><a href="/mac_identity/{{mac_identity.id}}">{{mac_identity.mac}}</a></td>
+        <td>{{mac_identity.name}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="mac_identities">Identified mac addresses</a><br/>
 
 <h1>Edit settings</h1>
-<a href="mac_identities">Identified mac addresses</a><br/>
 <a href="sentinel_identities">My sentinels</a><br/>
 <a href="claim_sentinel">Add sentinel</a><br/>
 <br/>

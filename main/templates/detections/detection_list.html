@@ -1,10 +1,14 @@
 {%extends "main/base.html" %}
 {% block content %}
 <h1>Detection identities</h1>
-<ul>
+<table>
     {% for detection in detection_list %}
-    <li><a href="/detection/{{detection.id}}">{{detection.timestamp|date:"c"}} - {{detection.sender}}  {{detection.receiver}}</a></li>
+    <tr>
+        <td><a href="/detection/{{detection.id}}">{{detection.timestamp|date:"c"}}</a></td>
+        <td>{{detection.sender}}</td>
+        <td>{{detection.receiver}}</td>
+    </tr>
     {% endfor %}
-</ul>
+</table>
 <a href="/">Main menu</a>
 {% endblock %}
