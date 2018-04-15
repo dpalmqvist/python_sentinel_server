@@ -1,7 +1,75 @@
 {%extends "main/base.html" %}
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+<style>
+body{
+font-family: "Trebuchet MS", sans-serif;
+margin: 50px;
+}
+.demoHeaders {
+margin-top: 2em;
+}
+#dialog-link {
+padding: .4em 1em .4em 20px;
+text-decoration: none;
+position: relative;
+}
+#dialog-link span.ui-icon {
+margin: 0 5px 0 0;
+position: absolute;
+left: .2em;
+top: 50%;
+margin-top: -8px;
+}
+#icons {
+margin: 0;
+padding: 0;
+}
+#icons li {
+margin: 2px;
+position: relative;
+padding: 4px 0;
+cursor: pointer;
+float: left;
+list-style: none;
+}
+#icons span.ui-icon {
+float: left;
+margin: 0 4px;
+}
+.fakewindowcontain .ui-widget-overlay {
+position: absolute;
+}
+select {
+width: 200px;
+}
+</style>
+{% endblock %}
+{% block javascript %}
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+
+<script>
+$(document).ready( function () {
+$('#detectionTable').DataTable();
+} );
+console.log("here")
+</script>
+{% endblock %}
 {% block content %}
+
 <h1>Detection identities</h1>
-<table>
+<table id="detectionTable">
+    <thead>
+        <tr>
+            <th>Timestamp</th>
+            <th>Sender</th>
+            <th>Receiver</th>
+        </tr>
+    </thead>
     {% for detection in detection_list %}
     <tr>
         <td><a href="/detection/{{detection.id}}">{{detection.timestamp|date:"c"}}</a></td>

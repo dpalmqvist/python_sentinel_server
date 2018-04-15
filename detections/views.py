@@ -1,10 +1,12 @@
+from datetime import timedelta, datetime
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.template import loader
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic import ListView, UpdateView, DeleteView, DetailView, CreateView
 
 from detections.models import Detection, MacIdentity, SentinelIdentity
 
@@ -21,7 +23,9 @@ def detections(request):
     mac_to_name = {}
     for mac_identity in mac_identities:
         mac_to_name[mac_identity.mac] = mac_identity.name
-    detections = Detection.objects.filter(sentinel_identity__user=request.user).order_by('-timestamp')[:100]
+    detections = Detection.objects.filter(sentinel_identity__user=request.user)\
+                    .filter(timestamp__gt=datetime.now()-timedelta(days=1))\
+                     .order_by('-timestamp')
     detection_list = []
     for detection in detections:
         detection_list.append({"id":detection.id, "timestamp":detection.timestamp,
@@ -31,23 +35,6 @@ def detections(request):
     template = loader.get_template('detections/detection_list.html')
     context = {'detection_list': detection_list}
     return HttpResponse(template.render(context, request))
-
-
-
-class Detections(LoginRequiredMixin, ListView):
-    context_object_name = 'detection_list'
-    template_name = 'detections/detections.html'
-
-    def get_queryset(self):
-        mac_identities = MacIdentity.objects.filter(user=self.request.user)
-        mac_to_name = {}
-        for mac_identity in mac_identities:
-            mac_to_name[mac_identity.mac] = mac_identity.name
-        queryset = Detection.objects.filter(user=self.request.user)
-
-        return queryset
-
-
 
 def report(request, det):
     detections = []
