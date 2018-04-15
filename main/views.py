@@ -13,13 +13,16 @@ def main(request):
         for mac_identity in mac_identities:
             mac_to_name[mac_identity.mac] = mac_identity.name
 
-        detections = Detection.objects.filter(sentinel_identity__user=request.user).order_by('-timestamp')[:10]
+        detections = Detection.objects.filter(sentinel_identity__user=request.user).order_by('-timestamp')
         detection_list = []
         for detection in detections:
-            detection_list.append({"id":detection.id, "timestamp":detection.timestamp,
-                               "sender": mac_to_name.get(detection.sender, detection.sender),
-                               "receiver":mac_to_name.get(detection.receiver, detection.receiver)})
-
+            if mac_to_name.get(detection.sender) is None \
+                    or mac_to_name.get(detection.receiver) is None:
+                detection_list.append({"id":detection.id, "timestamp":detection.timestamp,
+                                   "sender": mac_to_name.get(detection.sender, detection.sender),
+                                   "receiver":mac_to_name.get(detection.receiver, detection.receiver)})
+            if len(detection_list) > 19:
+                break
         context = {
             'mac_identities': mac_identities,
             'detection_list': detection_list,

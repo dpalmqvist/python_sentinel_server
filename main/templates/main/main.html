@@ -5,11 +5,11 @@
 <p>Please login to see this page.</p>
 <a href="/login">Log in</a>
 {% else %}
-<h1>Detections</h1>
+<h1>Recent detections from unknown MAC addresses</h1>
 <table>
     {% for detection in detection_list %}
     <tr>
-        <td><a href="/detection/{{detection.id}}">{{detection.timestamp|date:"c"}}</a></td>
+        <td><a href="/detection/{{detection.id}}">{{detection.timestamp|date:"y M d - H:i"}}</a></td>
         <td>{{detection.sender}}</td>
         <td>{{detection.receiver}}</td>
     </tr>
