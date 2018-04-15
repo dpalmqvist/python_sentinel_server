@@ -1,5 +1,6 @@
 from datetime import timedelta, datetime
 
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
@@ -24,7 +25,7 @@ def detections(request):
     for mac_identity in mac_identities:
         mac_to_name[mac_identity.mac] = mac_identity.name
     detections = Detection.objects.filter(sentinel_identity__user=request.user)\
-                    .filter(timestamp__gt=datetime.now()-timedelta(days=1))\
+                    .filter(timestamp__gt=timezone.now()-timedelta(days=1))\
                      .order_by('-timestamp')
     detection_list = []
     for detection in detections:
